@@ -13,7 +13,9 @@ class UniformNotifier
         opt = {}
         opt = UniformNotifier.bugsnag if UniformNotifier.bugsnag.is_a?(Hash)
 
-        exception = Exception.new(data[:title])
+        message = data[:title]
+        message += data[:body] if data[:body]
+        exception = Exception.new(message)
         exception.set_backtrace(data[:backtrace]) if data[:backtrace]
         Bugsnag.notify(exception, opt.merge(grouping_hash: data[:body] || data[:title], notification: data))
       end

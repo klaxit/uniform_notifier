@@ -17,7 +17,7 @@ RSpec.describe UniformNotifier::BugsnagNotifier do
 
     it 'should notify bugsnag' do
       expect(Bugsnag).to receive(:notify).with(
-        UniformNotifier::Exception.new(notification_data[:title]),
+        UniformNotifier::Exception.new(notification_data[:title] + notification_data[:body]),
         grouping_hash: notification_data[:body],
         notification: notification_data
       )
@@ -28,7 +28,7 @@ RSpec.describe UniformNotifier::BugsnagNotifier do
 
     it 'should notify bugsnag with option' do
       expect(Bugsnag).to receive(:notify).with(
-        UniformNotifier::Exception.new(notification_data[:title]),
+        UniformNotifier::Exception.new(notification_data[:title]  + notification_data[:body]),
         foo: :bar,
         grouping_hash: notification_data[:body],
         notification: notification_data
